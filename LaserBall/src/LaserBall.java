@@ -8,10 +8,12 @@ public class LaserBall extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new LaserBall("LaserBall"));
 		
+		app.setDisplayMode(1280, 720, false);
 		app.setAlwaysRender(true);
 		app.setShowFPS(false);
 		app.setTargetFrameRate(60);
-		app.setDisplayMode(1280, 720, false);
+		
+		app.start();
 	}
 	
 	public LaserBall(String name) {
