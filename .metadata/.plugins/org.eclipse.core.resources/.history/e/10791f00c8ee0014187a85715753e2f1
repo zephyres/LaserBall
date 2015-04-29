@@ -1,0 +1,24 @@
+package world;
+
+import org.newdawn.slick.SlickException;
+import entity.Entity;
+
+public class MainMenu extends World {
+	public MainMenu() {
+		
+	}
+	
+	@Override
+	public int getID() {
+		return 0;
+	}
+
+	@Override
+	public void init() throws SlickException {
+		
+	}
+}
+
+class Logo extends Entity {
+	
+}

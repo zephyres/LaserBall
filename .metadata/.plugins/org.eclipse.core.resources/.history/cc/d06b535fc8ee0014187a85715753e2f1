@@ -1,13 +1,9 @@
 package world;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import entity.Entity;
 
@@ -24,7 +20,6 @@ public class MainMenu extends World {
 	@Override
 	public void init() throws SlickException {
 		addObject(new Logo(), 640, 360);
-		setBackgroundColor(new Color(16, 30, 45));
 	}
 }
 
@@ -36,8 +31,7 @@ class Logo extends Entity {
 	@Override
 	public void update(GameContainer gc, StateBasedGame gs, int d)
 			throws SlickException {
-		if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
-			gs.enterState(2, new FadeOutTransition(), new FadeInTransition());
+		
 	}
 	
 }
