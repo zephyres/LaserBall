@@ -1,0 +1,26 @@
+package world;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import entity.Player;
+
+public class Game extends World {
+	Player player;
+	
+	public Game() throws SlickException {
+		
+	}
+	
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+	@Override
+	public void init() {
+		player = new Player(new Image("images/player.png"), 0);
+		addObject(player, 100f, 100f);
+	}
+
+}

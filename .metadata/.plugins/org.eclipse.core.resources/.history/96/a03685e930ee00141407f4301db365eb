@@ -1,0 +1,63 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+public abstract class Entity {
+	private Image image;
+	private float x, y, rotation;
+	
+	public Entity(Image i, float x, float y, float r) {
+		this.image = i;
+		this.x = x;
+		this.y = y;
+		this.rotation = r;
+	}
+	
+	public void setX(float x) {
+		this.x = x;
+	}
+	
+	public void setY(float y) {
+		this.y = y;
+	}
+	
+	public void setRotation(float r) {
+		rotation = r;
+	}
+	
+	public void setImage(Image i) {
+		this.image = i;
+	}
+	
+	public float getX() {
+		return x;
+	}
+	
+	public float getY() {
+		return y;
+	}
+	
+	public float getRotation() {
+		return rotation;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+	
+	public void turnTowards(float x, float y) {
+		
+	}
+	
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		image.draw(x, y);
+	}
+
+	abstract public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException;
+}

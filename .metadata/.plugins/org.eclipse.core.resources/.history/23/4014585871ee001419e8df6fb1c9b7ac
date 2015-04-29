@@ -1,0 +1,33 @@
+package world;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import entity.Grid;
+import entity.Player;
+
+public class Game extends World {
+	Player player;
+	Grid grid;
+	
+	public Game() throws SlickException {
+		
+	}
+	
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+	@Override
+	public void init() throws SlickException {
+		player = new Player();
+		grid = new Grid();
+		
+		addObject(player, 100f, 100f);
+		addObject(grid, 0, 0);
+		setBackgroundColor(new Color(24, 30, 35));
+	}
+
+}

@@ -1,0 +1,16 @@
+package utility;
+
+import java.lang.Math;
+
+import entity.Entity;
+import entity.RenderableEntity;
+
+public class Geometry {
+	public static int getQuadrant(Entity e, float x, float y) {
+		int quadrant = 1;
+		
+		
+		
+		return 0;
+	}
+}

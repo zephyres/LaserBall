@@ -1,0 +1,17 @@
+package world;
+
+public class MainMenu extends World {
+	public MainMenu() {
+		
+	}
+	
+	@Override
+	public int getID() {
+		return 0;
+	}
+
+	@Override
+	public void init() {
+		
+	}
+}

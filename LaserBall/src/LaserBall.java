@@ -3,6 +3,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import world.Game;
+
 
 public class LaserBall extends StateBasedGame {
 	public static void main(String[] args) throws SlickException {
@@ -22,6 +24,6 @@ public class LaserBall extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		
+		addState(new Game());
 	}
 }

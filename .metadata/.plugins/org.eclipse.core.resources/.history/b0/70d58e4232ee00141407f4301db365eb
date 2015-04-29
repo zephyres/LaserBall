@@ -1,0 +1,18 @@
+package world;
+
+import org.newdawn.slick.Image;
+
+import entity.Player;
+
+public class Game extends World {
+	
+	public Game() {
+		addObject(new Player(new Image("images/player.png")), 100f, 100f);
+	}
+	
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+}

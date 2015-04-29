@@ -1,0 +1,14 @@
+package world;
+
+public class Game extends World {
+	
+	public Game() {
+		addObject(new Player(new Image("images/player.png")), 100, 100);
+	}
+	
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+}

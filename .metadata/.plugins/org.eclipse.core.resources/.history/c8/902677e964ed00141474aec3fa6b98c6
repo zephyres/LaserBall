@@ -1,0 +1,9 @@
+package utility;
+
+import java.lang.Math;
+
+public class Math {
+	public static int getQuadrant() {
+		
+	}
+}

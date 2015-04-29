@@ -1,0 +1,6 @@
+package entity;
+
+public class Player extends RenderableEntity implements Entity {
+	
+
+}

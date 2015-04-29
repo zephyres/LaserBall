@@ -1,0 +1,8 @@
+package entity;
+
+public class Player extends RenderableEntity {
+	public Player(float x, float y) {
+		super(x, y);
+	}
+
+}

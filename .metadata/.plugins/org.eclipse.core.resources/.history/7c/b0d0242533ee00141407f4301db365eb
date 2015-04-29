@@ -1,0 +1,15 @@
+package utility;
+
+import java.lang.Math;
+
+import entity.Entity;
+
+public class Geometry {
+	public static int getQuadrant(float x1, float y1, float x2, float y2) {
+		int quadrant = 1;
+		
+		
+		
+		return 0;
+	}
+}

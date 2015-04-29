@@ -1,0 +1,60 @@
+package world;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+
+import java.util.ArrayList;
+import entity.Entity;
+
+public abstract class World extends BasicGameState {
+	ArrayList<Entity> entitiesInWorld, removeList;
+	
+	@Override
+	public void init(GameContainer gc, StateBasedGame gs)
+			throws SlickException {
+		entitiesInWorld = new ArrayList<Entity>();
+		removeList = new ArrayList<Entity>();
+	}
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		//Render entities
+		for(Entity e : entitiesInWorld)
+			e.render(gc, gs, g);
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		//Update entities
+		for(Entity e : entitiesInWorld)
+			e.update(gc, gs, d);
+		
+		//Remove entities in removeList from world
+		for(Entity e : removeList)
+			entitiesInWorld.remove(e);
+		removeList.clear();
+	}
+	
+	public void addObject(RenderableEntity e) {
+		entitiesInWorld.add(e);
+	}
+	
+	public void removeObject(RenderableEntity e) {
+		removeList.add(e);
+	}
+	
+	public void removeObjects(Class cls) {
+		for(RenderableEntity e : entitiesInWorld)
+			if(e.getClass().equals(cls))
+				removeList.add(e);
+	}
+	
+	public ArrayList<RenderableEntity> getEntitiesInWorld() {
+		return entitiesInWorld;
+	}
+}
