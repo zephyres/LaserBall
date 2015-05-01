@@ -1,0 +1,24 @@
+package world;
+
+import org.newdawn.slick.SlickException;
+
+import entity.Entity;
+
+public class ReferenceFrame extends World {
+	private Entity reference;
+	
+	public ReferenceFrame(Entity reference) {
+		this.reference = reference;
+	}
+	
+	@Override
+	public void init() throws SlickException {
+		
+	}
+
+	@Override
+	public int getID() {
+		return 3;
+	}
+
+}

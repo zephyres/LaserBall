@@ -1,0 +1,30 @@
+package world;
+
+import org.newdawn.slick.SlickException;
+
+import entity.Entity;
+import entity.Grid;
+import entity.Player;
+
+public class ReferenceFrame extends World {
+	private Entity reference;
+	
+	public ReferenceFrame(Entity reference) {
+		this.reference = reference;
+	}
+	
+	@Override
+	public void init() throws SlickException {
+		player = new Player();
+		grid = new Grid();
+		
+		addObject(grid, 640, 360);
+		addObject(player, 100f, 100f);
+	}
+
+	@Override
+	public int getID() {
+		return 3;
+	}
+
+}

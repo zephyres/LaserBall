@@ -1,0 +1,37 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+import java.util.ArrayList;
+
+public class Camera extends Entity {
+	private ArrayList<Entity> entitiesInWorld;
+	private Player player;
+	private Grid grid;
+	
+	public Camera() {
+		entitiesInWorld = new ArrayList<Entity>();
+		
+		player = new Player();
+		grid = new Grid();
+		
+		addObject(grid, 640, 360);
+		addObject(player, 100f, 100f);
+	}
+	
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		
+	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		
+	}
+	
+	public 
+}

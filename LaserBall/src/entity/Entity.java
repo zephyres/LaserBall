@@ -7,50 +7,78 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import utility.Geometry;
+import utility.ReferenceFrame;
+import utility.Vector;
+import world.World;
 
 public abstract class Entity {
+	private World world;
 	private Image image;
-	private float x, y, rotation;
+	private Vector location;
+	private float rotation, speed;
+	
+	public void setLocation(Vector v) {
+		location = v;
+	}
 	
 	public void setX(float x) {
-		this.x = x;
+		location.setX(x);
 	}
 	
 	public void setY(float y) {
-		this.y = y;
+		location.setY(y);
 	}
 	
 	public void changeX(float dx) {
-		x += dx;
+		location.changeX(dx);
 	}
 	
 	public void changeY(float dy) {
-		y += dy;
+		location.changeY(dy);
 	}
 	
 	public void setRotation(float r) {
 		rotation = r;
-		image.setRotation(rotation);
+	}
+	
+	public void setSpeed(float s) {
+		speed = s;
 	}
 	
 	public void setImage(Image i) {
 		this.image = i;
 	}
 	
+	public void setWorld(World w) {
+		world = w;
+	}
+	
 	public float getX() {
-		return x;
+		return location.getX();
 	}
 	
 	public float getY() {
-		return y;
+		return location.getY();
+	}
+	
+	public Vector getLocation() {
+		return location;
 	}
 	
 	public float getRotation() {
 		return rotation;
 	}
 	
+	public float getSpeed() {
+		return speed;
+	}
+	
 	public Image getImage() {
 		return image;
+	}
+	
+	public World getWorld() {
+		return world;
 	}
 	
 	public int getWidth() {
@@ -61,14 +89,32 @@ public abstract class Entity {
 		return image.getHeight();
 	}
 	
+	public boolean atWorldEdge() {
+		return getX() < 0 || getX() > 1920 || getY() < 0 || getY() > 1080;
+	}
+	
 	public void turnTowards(float x, float y) {
-		float angle = Geometry.getAngle(getX(), getY(), x, y);
+		ReferenceFrame rf = getWorld().getReferenceFrame();
+		
+		float rx = rf.getRelativeX();
+		float ry = rf.getRelativeY();
+		
+		float angle = Geometry.getAngle(getX() - rx, getY() - ry, x, y);
 		setRotation(angle);
+	}
+	
+	public void move(float speed) {
+		changeX(Geometry.getXComponent(speed, getRotation()));
+		changeY(Geometry.getYComponent(speed, getRotation()));
 	}
 	
 	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
 			throws SlickException {
-		image.draw(x - (getWidth() / 2.0f), y - (getHeight() / 2.0f));
+		float rx = getWorld().getReferenceFrame().getRelativeX();
+		float ry = getWorld().getReferenceFrame().getRelativeY();
+		
+		image.setRotation(rotation);
+		image.draw(getX() - (getWidth() / 2.0f) - rx, getY() - (getHeight() / 2.0f) - ry);
 	}
 
 	abstract public void update(GameContainer gc, StateBasedGame gs, int d)

@@ -1,0 +1,55 @@
+package utility;
+
+import entity.Entity;
+
+public class ReferenceFrame {
+	private final float W = 1280, H = 720;
+	private int width, height;
+	private Entity reference;
+	
+	public ReferenceFrame(Entity e, int width, int height) {
+		reference = e;
+		this.width = width;
+		this.height = height;
+	}
+	
+	public void setReference(Entity e) {
+		reference = e;
+	}
+	
+	public void setWidth(int w) {
+		width = w;
+	}
+	
+	public void setHeight(int h) {
+		height = h;
+	}
+	
+	public Entity getReference() {
+		return reference;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public float getRelativeX(float x, float y) {
+		float rx = 0;
+		float midWidth = W / 2;
+		
+		rx = reference.getX() - midWidth;
+		
+		return rx;
+	}
+	
+	public float getRelativeY(float x, float y) {
+		float ry = 0;
+		float midHeight = H / 2;
+		
+		return ry;
+	}
+}

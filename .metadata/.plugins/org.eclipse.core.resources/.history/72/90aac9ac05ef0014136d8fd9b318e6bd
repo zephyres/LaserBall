@@ -1,0 +1,14 @@
+package entity;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+public class LaserWave extends ProjectileEntity {
+
+	public LaserWave(float s, float r, float d) throws SlickException {
+		super(s, r, d);
+		
+		setImage(new Image("images/laser.png").getScaledCopy(0.8f));
+	}
+	
+}

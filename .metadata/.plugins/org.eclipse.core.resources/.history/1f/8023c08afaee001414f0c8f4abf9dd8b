@@ -1,0 +1,11 @@
+package entity;
+
+public class LaserWave extends ProjectileEntity {
+
+	public LaserWave(float s, float r, float d) {
+		super(s, r, d);
+		
+		setImage(new Image("images/laser.png"));
+	}
+	
+}

@@ -35,4 +35,14 @@ public class Geometry {
 		
 		return (angle + 180) % 360;
 	}
+	
+	public static float getXComponent(float m, float a) {
+		float x = (float) -(m * Math.sin(Math.toRadians(360 - a)));
+		return x;
+	}
+	
+	public static float getYComponent(float m, float a) {
+		float y = (float) -(m * Math.cos(Math.toRadians(360 - a)));
+		return y;
+	}
 }

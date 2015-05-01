@@ -7,12 +7,16 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import utility.ReferenceFrame;
+import utility.Vector;
+
 import java.util.ArrayList;
 
 import entity.Entity;
 
 public abstract class World extends BasicGameState {
-	private ArrayList<Entity> entitiesInWorld, removeList;
+	private ArrayList<Entity> entitiesInWorld, addList, removeList;
+	private ReferenceFrame rf;
 	private Color backgroundColor;
 	
 	@Override
@@ -20,6 +24,9 @@ public abstract class World extends BasicGameState {
 			throws SlickException {
 		entitiesInWorld = new ArrayList<Entity>();
 		removeList = new ArrayList<Entity>();
+		addList = new ArrayList<Entity>();
+		
+		rf = new ReferenceFrame(null, 1920, 1080);
 		backgroundColor = new Color(0, 0, 0);
 		
 		init();
@@ -43,24 +50,31 @@ public abstract class World extends BasicGameState {
 		for(Entity e : entitiesInWorld)
 			e.update(gc, gs, d);
 		
+		//Add new entities from addList
+		for(Entity e : addList)
+			entitiesInWorld.add(e);
+		
 		//Remove entities in removeList from world
 		for(Entity e : removeList)
 			entitiesInWorld.remove(e);
+		
+		//Clear lists
+		addList.clear();
 		removeList.clear();
 	}
 	
 	public void addObject(Entity e, float x, float y) {
-		entitiesInWorld.add(e);
+		addList.add(e);
 		
-		e.setX(x);
-		e.setY(y);
+		e.setWorld(this);
+		e.setLocation(new Vector(x, y));
 	}
 	
 	public void removeObject(Entity e) {
 		removeList.add(e);
 	}
 	
-	public void removeObjects(Class cls) {
+	public void removeObjects(@SuppressWarnings("rawtypes") Class cls) {
 		for(Entity e : entitiesInWorld)
 			if(e.getClass().equals(cls))
 				removeList.add(e);
@@ -70,8 +84,16 @@ public abstract class World extends BasicGameState {
 		backgroundColor = c;
 	}
 	
+	public void setReferenceFrame(ReferenceFrame rf) {
+		this.rf = rf;
+	}
+	
 	public ArrayList<Entity> getEntitiesInWorld() {
 		return entitiesInWorld;
+	}
+	
+	public ReferenceFrame getReferenceFrame() {
+		return rf;
 	}
 	
 	abstract public void init() throws SlickException;

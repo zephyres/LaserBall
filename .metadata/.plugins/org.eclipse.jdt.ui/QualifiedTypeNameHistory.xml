@@ -5,14 +5,16 @@
 <fullyQualifiedTypeName name="entity.Player"/>
 <fullyQualifiedTypeName name="world.Game"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.SlickException"/>
-<fullyQualifiedTypeName name="utility.Geometry"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="entity.Grid"/>
-<fullyQualifiedTypeName name="entity.Entity"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
 <fullyQualifiedTypeName name="world.MainMenu"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeOutTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeInTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.CrossStateTransition"/>
+<fullyQualifiedTypeName name="world.World"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
+<fullyQualifiedTypeName name="utility.Geometry"/>
+<fullyQualifiedTypeName name="entity.Entity"/>
+<fullyQualifiedTypeName name="utility.ReferenceFrame"/>
 </qualifiedTypeNameHistroy>
