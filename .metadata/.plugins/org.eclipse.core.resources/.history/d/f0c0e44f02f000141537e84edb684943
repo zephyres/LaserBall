@@ -1,0 +1,34 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+public class Explosion extends Entity {
+	private Image image;
+	private float size, counter;
+	
+	public Explosion(float size) throws SlickException {
+		image = new Image("images/explosion.png");
+		
+		this.size = size;
+		setImage(image.getScaledCopy(0));
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		setRotation(counter / 50 * 360);
+		
+		if(counter < 25)
+			setImage(image.getScaledCopy(counter / 15));
+		else if(counter >= 25)
+			setImage(image.getScaledCopy((50 - counter) / 15));
+		
+		if(counter >= 50)
+			getWorld().removeObject(this);
+		
+		counter++;
+	}
+}

@@ -30,7 +30,7 @@ public class ProjectileEntity extends Entity {
 		changeY(v.getY());
 		
 		if(atWorldEdge()) {
-			getWorld().addObject(new ExplosionCluster(30, 20), getX(), getY());
+			getWorld().addObject(new ExplosionCluster(), getX(), getY());
 			getWorld().removeObject(this);
 		}
 	}

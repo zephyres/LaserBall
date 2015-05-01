@@ -1,0 +1,9 @@
+package entity;
+
+public class Explosion extends Entity {
+	private float size;
+	
+	public Explosion(float size) {
+		
+	}
+}

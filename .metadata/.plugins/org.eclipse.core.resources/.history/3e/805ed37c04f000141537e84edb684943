@@ -1,0 +1,37 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+import java.util.Random;
+
+public class ExplosionCluster extends Entity {
+	private Random r;
+	private int counter;
+	
+	public ExplosionCluster(int time, int range) throws SlickException {
+		r = new Random();
+		
+		setImage(new Image("images/explosion.png").getScaledCopy(0));
+		counter = 0;
+	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		if(r.nextInt(100) < 20) {
+			float x = 20 - r.nextInt(40) + getX();
+			float y = 20 - r.nextInt(40) + getY();
+			float size = (r.nextInt(100) + 1) / 100f + 2;
+			
+			getWorld().addObject(new Explosion(size), x, y);
+		}
+		
+		if(counter > 50)
+			getWorld().removeObject(this);
+		counter++;
+	}
+
+}

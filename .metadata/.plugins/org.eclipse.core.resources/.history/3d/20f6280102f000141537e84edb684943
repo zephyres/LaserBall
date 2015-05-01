@@ -29,10 +29,8 @@ public class ProjectileEntity extends Entity {
 		changeX(v.getX());
 		changeY(v.getY());
 		
-		if(atWorldEdge()) {
-			getWorld().addObject(new ExplosionCluster(30, 20), getX(), getY());
+		if(atWorldEdge())
 			getWorld().removeObject(this);
-		}
 	}
 
 }

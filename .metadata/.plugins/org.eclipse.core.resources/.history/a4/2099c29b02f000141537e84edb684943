@@ -90,8 +90,7 @@ public abstract class Entity {
 	}
 	
 	public boolean atWorldEdge() {
-		return getX() < getWidth() / 2 || getX() > 1920 - getWidth() / 2 || 
-				getY() < getHeight() / 2 || getY() > 1080 - getHeight() / 2;
+		return getX() < 0 || getX() > 1920 || getY() < 0 || getY() > 1080;
 	}
 	
 	public void turnTowards(float x, float y) {
