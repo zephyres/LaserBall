@@ -13,8 +13,9 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeInTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.CrossStateTransition"/>
 <fullyQualifiedTypeName name="world.World"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
-<fullyQualifiedTypeName name="utility.Geometry"/>
 <fullyQualifiedTypeName name="entity.Entity"/>
 <fullyQualifiedTypeName name="utility.ReferenceFrame"/>
+<fullyQualifiedTypeName name="utility.Geometry"/>
+<fullyQualifiedTypeName name="utility.Vector"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
 </qualifiedTypeNameHistroy>

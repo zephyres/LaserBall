@@ -37,7 +37,7 @@ public class ProjectileEntity extends Entity {
 		changeX(v.getX());
 		changeY(v.getY());
 		
-		int cap = (int) Math.pow(2, -0.02 * counter + 8) + 10;
+		int cap = (int) Math.pow(2, -0.05 * counter + 8) + 10;
 		
 		if(atWorldEdge() || r.nextInt(cap) < 2) {
 			getWorld().addObject(new ExplosionCluster(30, 20), getX(), getY());
