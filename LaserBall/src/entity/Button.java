@@ -25,7 +25,7 @@ public class Button extends Entity {
 		highlight = Color.white;
 		base = new Color(12, 23, 34);
 		
-		font = Fonts.getRoboto();
+		font = Fonts.getRoboto(24f);
 	}
 	
 	public void render(GameContainer gc, StateBasedGame gs, Graphics g)

@@ -26,6 +26,6 @@ public class Game extends World {
 	
 	@Override
 	public int getID() {
-		return 2;
+		return 3;
 	}
 }

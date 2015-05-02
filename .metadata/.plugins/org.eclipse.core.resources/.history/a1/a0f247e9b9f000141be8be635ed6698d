@@ -1,0 +1,23 @@
+package world;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.SlickException;
+
+import entity.Grid;
+import entity.PrologueText;
+
+public class Prologue extends World {
+
+	@Override
+	public void init() throws SlickException {
+		addObject(new Grid(), 960, 540);
+		addObject(new PrologueText(), 0, 0);
+		setBackgroundColor(new Color(16, 30, 45));
+	}
+
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+}

@@ -5,6 +5,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import world.Game;
 import world.MainMenu;
+import world.Prologue;
 
 
 public class LaserBall extends StateBasedGame {
@@ -26,6 +27,7 @@ public class LaserBall extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MainMenu());
+		addState(new Prologue());
 		addState(new Game());
 	}
 }

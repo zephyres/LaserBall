@@ -1,0 +1,17 @@
+package world;
+
+import org.newdawn.slick.SlickException;
+
+public class Prologue extends World {
+
+	@Override
+	public void init() throws SlickException {
+		
+	}
+
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+}

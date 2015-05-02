@@ -1,0 +1,30 @@
+package world;
+
+import java.io.FileNotFoundException;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.SlickException;
+
+import entity.Grid;
+import entity.PrologueText;
+
+public class Prologue extends World {
+
+	@Override
+	public void init() throws SlickException {
+		addObject(new Grid(), 960, 540);
+		try {
+			addObject(new PrologueText(), 0, 0);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setBackgroundColor(new Color(16, 30, 45));
+	}
+
+	@Override
+	public int getID() {
+		return 2;
+	}
+
+}
