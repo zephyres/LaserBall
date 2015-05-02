@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="entity.Button"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 <fullyQualifiedTypeName name="world.World"/>
 <fullyQualifiedTypeName name="entity.MenuList"/>
 <fullyQualifiedTypeName name="world.Prologue"/>
@@ -30,4 +29,5 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.TrueTypeFont"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeInTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeOutTransition"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 </qualifiedTypeNameHistroy>

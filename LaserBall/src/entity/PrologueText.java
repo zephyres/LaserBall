@@ -18,65 +18,65 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class PrologueText extends Entity {
-    private Scanner scan;
-    private ArrayList<String> text;
-    private TrueTypeFont font, small;
-    private int count, lineNum, temp;
+	private Scanner scan;
+	private ArrayList<String> text;
+	private TrueTypeFont font, small;
+	private int count, lineNum, temp;
 
-    public PrologueText() throws FileNotFoundException {
-        text = new ArrayList<String>();
-        scan = new Scanner(new File("src/text/prologue.txt"));
-        font = Fonts.getRoboto(24f);
-        small = Fonts.getRoboto(18f);
-        
-        count = 0;
-        lineNum = 0;
-        temp = 0;
-    }
+	public PrologueText() throws FileNotFoundException {
+		text = new ArrayList<String>();
+		scan = new Scanner(new File("src/text/prologue.txt"));
+		font = Fonts.getRoboto(24f);
+		small = Fonts.getRoboto(18f);
 
-    public void render(GameContainer gc, StateBasedGame gs, Graphics g)
-            throws SlickException {
-        g.setColor(Color.white);
-        g.setFont(font);
+		count = 0;
+		lineNum = 0;
+		temp = 0;
+	}
 
-        for(int i = 0; i < text.size(); i++) {
-        	String s = text.get(i);
-            g.drawString(s, 630 - font.getWidth(s) / 2, 140 - font.getHeight() / 2 + i * 60);
-        }
-        
-        g.setFont(small);
-        String cut = "PRESS (SPACE) TO SKIP";
-        g.drawString(cut, 630 - small.getWidth(cut) / 2, 640);
-        
-        temp = lineNum;
-    }
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		g.setColor(Color.white);
+		g.setFont(font);
 
-    @Override
-    public void update(GameContainer gc, StateBasedGame gs, int d)
-            throws SlickException {
-        if(count <= 0) {
-            count = 100;
+		for(int i = 0; i < text.size(); i++) {
+			String s = text.get(i);
+			g.drawString(s, 630 - font.getWidth(s) / 2, 140 - font.getHeight() / 2 + i * 60);
+		}
 
-            if(scan.hasNext()) {
-                String s = scan.nextLine();
+		g.setFont(small);
+		String cut = "PRESS (SPACE) TO SKIP";
+		g.drawString(cut, 630 - small.getWidth(cut) / 2, 640);
 
-                if(!s.equals("*")) {
-                    text.add(s);
-                    lineNum++;
-                }
-                else {
-                    text.clear();
-                    lineNum = 0;
-                }
-            }
-            
-            else
-            	gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
-        }
-        
-        if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
-        	gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
+		temp = lineNum;
+	}
 
-        count--;
-    }
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		if(count <= 0) {
+			count = 100;
+
+			if(scan.hasNext()) {
+				String s = scan.nextLine();
+
+				if(!s.equals("*")) {
+					text.add(s);
+					lineNum++;
+				}
+				else {
+					text.clear();
+					lineNum = 0;
+				}
+			}
+
+			else
+				gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
+		}
+
+		if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
+			gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
+
+		count--;
+	}
 }
