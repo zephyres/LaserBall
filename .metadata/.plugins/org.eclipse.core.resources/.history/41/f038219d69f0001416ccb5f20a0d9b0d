@@ -111,9 +111,6 @@ public abstract class Entity {
 	
 	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
 			throws SlickException {
-		if(image == null)
-			setImage(new Image("images/empty.png"));
-		
 		float rx = getWorld().getReferenceFrame().getRelativeX();
 		float ry = getWorld().getReferenceFrame().getRelativeY();
 		
