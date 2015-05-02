@@ -1,0 +1,60 @@
+package entity;
+
+import java.awt.Font;
+import java.io.InputStream;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.ResourceLoader;
+
+public class Button extends Entity {
+	private final static float WIDTH = 300, HEIGHT = 50;
+	private Color base, highlight, border;
+	private TrueTypeFont font;
+	private String name;
+	
+	public Button(String name) {
+		this.name = name;
+		
+		border = Color.white;
+		base = new Color(12, 23, 34);
+		initFont();
+	}
+	
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		float x = getX() - WIDTH / 2;
+		float y = getY() - HEIGHT / 2;
+		
+		g.setColor(base);
+		g.fillRect(x, y, WIDTH, HEIGHT);
+		
+		g.setColor(border);
+		g.drawRect(x, y, WIDTH, HEIGHT);
+		
+		if(font != null) {
+			g.setFont(font);
+			g.drawString(name, x - font.getWidth(name) / 2, y - font.getHeight() / 2);
+		} else initFont();
+	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		
+	}
+	
+	private void initFont() {
+		try {
+			InputStream in = ResourceLoader.getResourceAsStream("fonts/AppleGothic.ttf");
+			Font f = Font.createFont(Font.TRUETYPE_FONT, in);
+			
+			f = f.deriveFont(24f);
+			font = new TrueTypeFont(f, false);
+		} catch(Exception e) {}
+	}
+}

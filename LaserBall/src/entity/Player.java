@@ -80,9 +80,9 @@ public class Player extends Entity {
 		float dx = Geometry.getXComponent(h, getRotation());
 		float dy = Geometry.getYComponent(h, getRotation());
 		
-		if(in.isKeyPressed(Input.KEY_SPACE))
+		if(in.isMousePressed(Input.MOUSE_LEFT_BUTTON))
 			getWorld().addObject(
-				new LaserWave(
+				new PlasmaBolt(
 					v.add(new Vector(10, getRotation(), 0)), 5
 				), getX() + dx, getY() + dy
 			);

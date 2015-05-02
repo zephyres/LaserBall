@@ -11,15 +11,6 @@ public class Game extends World {
 	ReferenceFrame rf;
 	Player player;
 	Grid grid;
-	
-	public Game() throws SlickException {
-		
-	}
-	
-	@Override
-	public int getID() {
-		return 2;
-	}
 
 	@Override
 	public void init() throws SlickException {
@@ -32,5 +23,9 @@ public class Game extends World {
 		setReferenceFrame(rf);
 		setBackgroundColor(new Color(16, 30, 45));
 	}
-
+	
+	@Override
+	public int getID() {
+		return 2;
+	}
 }

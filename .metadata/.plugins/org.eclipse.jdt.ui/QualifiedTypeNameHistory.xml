@@ -18,4 +18,5 @@
 <fullyQualifiedTypeName name="utility.Geometry"/>
 <fullyQualifiedTypeName name="utility.Vector"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
+<fullyQualifiedTypeName name="entity.Block"/>
 </qualifiedTypeNameHistroy>

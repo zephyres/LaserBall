@@ -1,0 +1,33 @@
+package entity;
+
+import java.util.ArrayList;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+import world.World;
+
+public class MenuList extends Entity {
+	private String[] buttonNames = {"Singleplayer", "Multiplayer", "Quit"};
+	private ArrayList<Entity> buttons;
+	
+	public MenuList() {
+		buttons = new ArrayList<Entity>();
+	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		
+	}
+	
+	public void initButtons() {
+		World world = getWorld();
+		
+		for(int i = 0; i < buttonNames.length; i++) {
+			buttons.add(new Button(buttonNames[i]));
+			world.addObject(buttons.get(i), 630, 330 + 90 * i);
+		}
+	}
+}

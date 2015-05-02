@@ -1,7 +1,6 @@
 package entity;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -16,8 +15,6 @@ public class ExplosionCluster extends Entity {
 		this.range = range;
 		counter = 0;
 		r = new Random();
-		
-		setImage(new Image("images/explosion.png").getScaledCopy(0));
 	}
 	
 	@Override

@@ -1,0 +1,9 @@
+package entity;
+
+public class Button extends Entity {
+	private String name;
+	
+	public Button(String name) {
+		
+	}
+}
