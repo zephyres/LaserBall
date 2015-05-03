@@ -95,7 +95,7 @@ public class PrologueText extends Entity {
 		}
 
 		if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
-			gs.enterState(3, new FadeOutTransition(new Color(16, 30, 45)), new FadeInTransition(new Color(16, 30, 45)));
+			gs.enterState(3, new FadeOutTransition(new Color(13, 24, 36)), new FadeInTransition());
 
 		count--;
 	}

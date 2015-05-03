@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;LaserBall.java&apos; to &apos;LaserBall/src/laserball&apos;&#x0A;- Original project: &apos;LaserBall&apos;&#x0A;- Destination element: &apos;LaserBall/src/laserball&apos;&#x0A;- Original element: &apos;LaserBall.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;laserball" element1="/src&lt;{LaserBall.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1430647082394" units="1" version="1.0"/>
+</session>

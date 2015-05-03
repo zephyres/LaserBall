@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="world.Game"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.SlickException"/>
 <fullyQualifiedTypeName name="world.MainMenu"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.state.transition.CrossStateTransition"/>
 <fullyQualifiedTypeName name="entity.Entity"/>
 <fullyQualifiedTypeName name="utility.ReferenceFrame"/>
 <fullyQualifiedTypeName name="utility.Geometry"/>
@@ -17,17 +16,21 @@
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="entity.Button"/>
-<fullyQualifiedTypeName name="world.World"/>
 <fullyQualifiedTypeName name="entity.MenuList"/>
 <fullyQualifiedTypeName name="world.Prologue"/>
 <fullyQualifiedTypeName name="entity.Grid"/>
 <fullyQualifiedTypeName name="entity.PrologueText"/>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="utility.Fonts"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.TrueTypeFont"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeInTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.state.transition.FadeOutTransition"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.state.BasicGameState"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="laserball.LaserBall"/>
+<fullyQualifiedTypeName name="world.World"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.state.transition.CrossStateTransition"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.state.GameState"/>
 </qualifiedTypeNameHistroy>
