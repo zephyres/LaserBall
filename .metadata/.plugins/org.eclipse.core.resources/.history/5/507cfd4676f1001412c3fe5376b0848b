@@ -1,0 +1,95 @@
+package entity;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+
+import utility.Fonts;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class PrologueText extends Entity {
+	private Scanner scan;
+	private ArrayList<String> text;
+	private TrueTypeFont font, small;
+	private int count;
+	private boolean clear;
+
+	public PrologueText() throws FileNotFoundException {
+		text = new ArrayList<String>();
+		scan = new Scanner(new File("src/text/prologue.txt"));
+		font = Fonts.getRoboto(24f);
+		small = Fonts.getRoboto(18f);
+
+		count = 0;
+		clear = false;
+	}
+
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {
+		g.setColor(Color.white);
+		g.setFont(font);
+
+		if(count <= 100) {
+			g.setColor(new Color(255, 255, 255, 255 * count / 100f));
+		}
+		
+		for(int i = 0; i < text.size(); i++) {
+			String s = text.get(i);
+			
+			float lineHeight = font.getHeight(s) / 2;
+			float lineWidth = font.getWidth(s) / 2;
+			
+			g.drawString(s, 630 - lineWidth, 360 - lineHeight + (i - (float) text.size() / 2) * 40);
+		}
+
+		g.setFont(small);
+		g.setColor(Color.white);
+		String cut = "PRESS (SPACE) TO SKIP";
+		g.drawString(cut, 630 - small.getWidth(cut) / 2, 640);
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		if(count <= 0) {
+			count = 300;
+
+			if(scan.hasNext()) {
+				String s = "";
+				
+				if(clear) {
+					text.clear();
+					clear = false;
+				}
+				
+				do {
+					s = scan.nextLine();
+					
+					if(!s.equals("*"))
+						text.add(s);
+					else
+						clear = true;
+					
+				} while(!s.equals("*"));
+			}
+
+			else
+				gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
+		}
+
+		if(gc.getInput().isKeyPressed(Input.KEY_SPACE))
+			gs.enterState(3, new FadeOutTransition(), new FadeInTransition());
+
+		count--;
+	}
+}

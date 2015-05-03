@@ -5,30 +5,50 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.Random;
-import java.lang.Math;
-
 import utility.Vector;
 
-public class ProjectileEntity extends Entity {
+abstract class ProjectileEntity extends Entity {
 	private Random r;
 	private Vector v;
+	private int counter, radius, blastTime;
 	private float damage;
-	private int counter;
 	
 	public ProjectileEntity(Vector v, float d) {
 		this.v = v;
 		damage = d;
-		counter = 0;
 		
 		r = new Random();
+		counter = 0;
+		radius = 20;
+		blastTime = 30;
 	}
 
 	public float getDamage() {
 		return damage;
 	}
 	
+	public int getRadius() {
+		return radius;
+	}
+	
+	public int getBlastTime() {
+		return blastTime;
+	}
+	
+	public int timeInWorld() {
+		return counter;
+	}
+	
 	public void setDamage(float d) {
 		damage = d;
+	}
+	
+	public void setRadius(int r) {
+		radius = r;
+	}
+	
+	public void setBlastTime(int b) {
+		blastTime = b;
 	}
 	
 	@Override
@@ -37,14 +57,13 @@ public class ProjectileEntity extends Entity {
 		changeX(v.getX());
 		changeY(v.getY());
 		
-		int cap = (int) Math.pow(2, -0.02 * counter + 8) + 10;
-		
-		if(atWorldEdge() || r.nextInt(cap) < 2) {
-			getWorld().addObject(new ExplosionCluster(30, 20), getX(), getY());
+		if(atWorldEdge() || r.nextInt(getCap()) < 2) {
+			getWorld().addObject(new ExplosionCluster(getBlastTime(), getRadius()), getX(), getY());
 			getWorld().removeObject(this);
 		}
 		
 		counter++;
 	}
-
+	
+	abstract public int getCap();
 }

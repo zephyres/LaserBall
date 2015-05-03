@@ -1,0 +1,22 @@
+package entity;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
+import utility.Vector;
+
+public class PlasmaBolt extends ProjectileEntity {
+
+	public PlasmaBolt(Vector v, float d) throws SlickException {
+		super(v, d);
+		
+		setImage(new Image("images/plasmabolt.png").getScaledCopy(0.6f));
+	}
+
+	@Override
+	public int getCap() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+}

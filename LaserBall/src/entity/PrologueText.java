@@ -18,10 +18,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class PrologueText extends Entity {
+	
+	private final int TEXT_TIME = 300;
+	private final int FADE_TIME = 80;
+	
 	private Scanner scan;
 	private ArrayList<String> text;
 	private TrueTypeFont font, small;
-	private int count, lineNum, temp;
+	private int count;
+	private boolean clear;
 
 	public PrologueText() throws FileNotFoundException {
 		text = new ArrayList<String>();
@@ -30,44 +35,59 @@ public class PrologueText extends Entity {
 		small = Fonts.getRoboto(18f);
 
 		count = 0;
-		lineNum = 0;
-		temp = 0;
+		clear = false;
 	}
 
 	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
 			throws SlickException {
-		g.setColor(Color.white);
+		if(count <= FADE_TIME) {
+			g.setColor(new Color(255, 255, 255, (int) (255f * ((float) count / FADE_TIME))));
+		}
+		
+		if(count >= TEXT_TIME - FADE_TIME) {
+			g.setColor(new Color(255, 255, 255, (int) (255f * ((float) (TEXT_TIME - count) / FADE_TIME))));
+		}
+		
 		g.setFont(font);
-
+		
 		for(int i = 0; i < text.size(); i++) {
 			String s = text.get(i);
-			g.drawString(s, 630 - font.getWidth(s) / 2, 140 - font.getHeight() / 2 + i * 60);
+			
+			float lineHeight = font.getHeight(s) / 2;
+			float lineWidth = font.getWidth(s) / 2;
+			
+			g.drawString(s, 630 - lineWidth, 360 - lineHeight + (i - (float) text.size() / 2) * 40);
 		}
 
 		g.setFont(small);
+		g.setColor(Color.white);
 		String cut = "PRESS (SPACE) TO SKIP";
 		g.drawString(cut, 630 - small.getWidth(cut) / 2, 640);
-
-		temp = lineNum;
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame gs, int d)
 			throws SlickException {
 		if(count <= 0) {
-			count = 100;
+			count = TEXT_TIME;
 
 			if(scan.hasNext()) {
-				String s = scan.nextLine();
-
-				if(!s.equals("*")) {
-					text.add(s);
-					lineNum++;
-				}
-				else {
+				String s = "";
+				
+				if(clear) {
 					text.clear();
-					lineNum = 0;
+					clear = false;
 				}
+				
+				do {
+					s = scan.nextLine();
+					
+					if(!s.equals("*"))
+						text.add(s);
+					else
+						clear = true;
+					
+				} while(!s.equals("*"));
 			}
 
 			else
