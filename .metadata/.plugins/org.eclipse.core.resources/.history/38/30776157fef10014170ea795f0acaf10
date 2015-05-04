@@ -1,0 +1,10 @@
+package entity.structure;
+
+import org.newdawn.slick.Image;
+import entity.Entity;
+
+abstract class Block extends Entity {
+	public Block(String link) {
+		setImage(new Image(link));
+	}
+}

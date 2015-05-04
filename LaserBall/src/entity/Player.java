@@ -14,7 +14,7 @@ public class Player extends Entity {
 	private float maxSpeed;
 	
 	public Player() throws SlickException {
-		Image i = new Image("images/player.png").getScaledCopy(0.35f);
+		Image i = new Image("images/player.png").getScaledCopy(0.25f);
 		a = new Vector(0.1f, 0.1f);
 		v = new Vector(0, 0);
 		

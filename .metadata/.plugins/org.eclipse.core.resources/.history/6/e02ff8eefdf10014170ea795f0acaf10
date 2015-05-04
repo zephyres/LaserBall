@@ -1,0 +1,20 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+public class Block extends Entity {
+	
+	public Block() throws SlickException {
+		setImage(new Image("images/block2.png"));
+	}
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		
+	}
+
+}

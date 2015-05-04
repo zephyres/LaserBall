@@ -1,0 +1,5 @@
+package entity.structure;
+
+public class SmallBlock extends Block {
+	
+}
