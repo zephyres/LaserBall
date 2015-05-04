@@ -2,8 +2,9 @@ package world;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
+
 import entity.Grid;
-import entity.gui.PrologueText;
+import entity.PrologueText;
 
 public class Prologue extends World {
 
