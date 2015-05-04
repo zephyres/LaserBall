@@ -1,9 +1,9 @@
 package entity;
 
+import entity.structure.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
 import java.util.Random;
 import utility.Vector;
 
@@ -57,7 +57,7 @@ abstract class ProjectileEntity extends Entity {
 		changeX(v.getX());
 		changeY(v.getY());
 		
-		if(atWorldEdge() || r.nextInt(getCap()) < 2) {
+		if(atWorldEdge() || r.nextInt(getCap()) < 2 || intersects(SmallBlock.class) || intersects(LargeBlock.class)) {
 			getWorld().addObject(new ExplosionCluster(getBlastTime(), getRadius()), getX(), getY());
 			getWorld().removeObject(this);
 		}

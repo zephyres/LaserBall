@@ -1,9 +1,0 @@
-package entity;
-
-public class BlockStructure {
-	private String schematic;
-	
-	public BlockStructure(String schematic) {
-		this.schematic = schematic;
-	}
-}

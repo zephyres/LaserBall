@@ -1,0 +1,122 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+import utility.Geometry;
+import utility.Vector;
+import entity.structure.*;
+
+public class Player extends Entity {
+	private Vector a, v;
+	private float maxSpeed;
+	
+	public Player() throws SlickException {
+		Image i = new Image("images/player.png").getScaledCopy(0.25f);
+		a = new Vector(0.1f, 0.1f);
+		v = new Vector(0, 0);
+		
+		setImage(i);
+		maxSpeed = 7;
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException {
+		Input in = gc.getInput();
+		
+		float mx = in.getMouseX();
+		float my = in.getMouseY();
+		
+		turnTowards(mx, my);
+		shootProjectile(in);
+		movePlayer(in);
+	}
+	
+	public void movePlayer(Input in) {
+		boolean small = intersects(SmallBlock.class);
+		boolean large = intersects(LargeBlock.class);
+		Entity e = null;
+		
+		if(small)
+			e = getIntersectingEntity(SmallBlock.class);
+		if(large)
+			e = getIntersectingEntity(LargeBlock.class);
+		
+		float dx = getWidth() / 2;
+		float dy = getHeight() / 2;
+		float edx = 0, edy = 0;
+		
+		if(e != null) {
+			edx = e.getWidth() / 2;
+			edy = e.getHeight() / 2;
+		}
+		
+		boolean left = e != null && getX() < e.getX();
+		boolean right = e != null && getX() > e.getX();
+		boolean up = e != null && getY() < e.getY();
+		boolean down = e != null && getY() > e.getY();
+		
+		if(left && (up || down))
+			if(Math.abs(getX()) - e.getX() > Math.abs(getY() - e.getY)) {
+				up = false;
+				down = false;
+			}
+		
+		System.out.println("" + up + down + left + right);
+		
+		if(getX() < dx || getX() > 1920 - dx || left || right && (!up || !down)) {
+			v.setX(0);
+			
+			if(right || getX() < dx)
+				changeX(0.1f);
+			if(left || getX() > 1920 - dx)
+				changeX(-0.1f);
+		}
+		
+		if((getY() < dy || getY() > 1080 - dy || up || down) && (!left || !right)) {
+			v.setY(0);
+			
+			if(down || getY() < dy)
+				changeY(0.1f);
+			if(up || getY() > 1080 - dy)
+				changeY(-0.1f);
+		}
+		
+		if(in.isKeyDown(Input.KEY_W) && getY() >= getHeight() / 2)
+			v.changeY(-a.getY());
+		if(in.isKeyDown(Input.KEY_A) && getX() >= getWidth() / 2)
+			v.changeX(-a.getX());
+		if(in.isKeyDown(Input.KEY_S) && getY() <= 1080 - getHeight() / 2)
+			v.changeY(a.getY());
+		if(in.isKeyDown(Input.KEY_D) && getX() <= 1920 - getWidth() / 2)
+			v.changeX(a.getX());
+		
+		if(v.getX() > maxSpeed)
+			v.setX(maxSpeed);
+		if(v.getX() < -maxSpeed)
+			v.setX(-maxSpeed);
+		if(v.getY() > maxSpeed)
+			v.setY(maxSpeed);
+		if(v.getY() < -maxSpeed)
+			v.setY(-maxSpeed);
+		
+		changeX(v.getX());
+		changeY(v.getY());
+	}
+	
+	public void shootProjectile(Input in) throws SlickException {
+		float h = getHeight() * 0.75f;
+		float dx = Geometry.getXComponent(h, getRotation());
+		float dy = Geometry.getYComponent(h, getRotation());
+		
+		if(in.isMousePressed(Input.MOUSE_LEFT_BUTTON))
+			getWorld().addObject(
+				new PlasmaBolt(
+					v.add(new Vector(10, getRotation(), 0)), 5
+				), getX() + dx, getY() + dy
+			);
+	}
+}

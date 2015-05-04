@@ -5,9 +5,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
 import utility.Geometry;
 import utility.Vector;
+import entity.structure.*;
 
 public class Player extends Entity {
 	private Vector a, v;
@@ -36,21 +36,52 @@ public class Player extends Entity {
 	}
 	
 	public void movePlayer(Input in) {
-		if(getX() < getWidth() / 2 || getX() > 1920 - getWidth() / 2) {
+		boolean small = intersects(SmallBlock.class);
+		boolean large = intersects(LargeBlock.class);
+		Entity e = null;
+		
+		if(small)
+			e = getIntersectingEntity(SmallBlock.class);
+		if(large)
+			e = getIntersectingEntity(LargeBlock.class);
+		
+		float dx = getWidth() / 2;
+		float dy = getHeight() / 2;
+		
+		boolean left = e != null && getX() < e.getX();
+		boolean right = e != null && getX() > e.getX();
+		boolean up = e != null && getY() < e.getY();
+		boolean down = e != null && getY() > e.getY();
+		
+		//Normalize (still needs fixing)
+		if((left || right) && (up || down)) {
+			if(Math.abs(getX() - e.getX()) > Math.abs(getY() - e.getY())) {
+				up = false;
+				down = false;
+			}
+			
+			else {
+				left = false;
+				right = false;
+			}
+		}
+				
+		if(getX() < dx || getX() > 1920 - dx || left || right && (!up || !down)) {
 			v.setX(0);
 			
-			if(getX() < getWidth() / 2)
-				setX(getWidth() / 2);
-			if(getX() > 1920 - getWidth() / 2)
-				setX(1920 - getWidth() / 2);
+			if(right || getX() < dx)
+				changeX(0.1f);
+			if(left || getX() > 1920 - dx)
+				changeX(-0.1f);
 		}
-		if(getY() < getHeight() / 2 || getY() > 1080 - getHeight() / 2) {
+		
+		if((getY() < dy || getY() > 1080 - dy || up || down) && (!left || !right)) {
 			v.setY(0);
 			
-			if(getY() < getHeight() / 2)
-				setY(getHeight() / 2);
-			if(getY() > 1080 - getHeight() / 2)
-				setY(1080 - getHeight() / 2);
+			if(down || getY() < dy)
+				changeY(0.1f);
+			if(up || getY() > 1080 - dy)
+				changeY(-0.1f);
 		}
 		
 		if(in.isKeyDown(Input.KEY_W) && getY() >= getHeight() / 2)

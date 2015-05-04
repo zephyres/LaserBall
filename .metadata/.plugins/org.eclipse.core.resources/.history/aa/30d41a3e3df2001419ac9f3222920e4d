@@ -1,0 +1,9 @@
+package utility;
+
+public class MapInfo {
+	private String map;
+	
+	public MapInfo(String map) {
+		this.map = map;
+	}
+}

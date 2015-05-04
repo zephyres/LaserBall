@@ -1,0 +1,174 @@
+package entity;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
+import utility.Geometry;
+import utility.ReferenceFrame;
+import utility.Vector;
+import world.World;
+
+public abstract class Entity {
+	private World world;
+	private Image image;
+	private Vector location;
+	private float rotation, speed;
+	
+	public Entity() {
+		try {
+			setImage(new Image("images/empty.png"));
+		} catch(SlickException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setLocation(Vector v) {
+		location = v;
+	}
+	
+	public void setX(float x) {
+		location.setX(x);
+	}
+	
+	public void setY(float y) {
+		location.setY(y);
+	}
+	
+	public void changeX(float dx) {
+		location.changeX(dx);
+	}
+	
+	public void changeY(float dy) {
+		location.changeY(dy);
+	}
+	
+	public void setRotation(float r) {
+		rotation = r;
+	}
+	
+	public void setSpeed(float s) {
+		speed = s;
+	}
+	
+	public void setImage(Image i) {
+		this.image = i;
+	}
+	
+	public void setWorld(World w) {
+		world = w;
+	}
+	
+	public float getX() {
+		return location.getX();
+	}
+	
+	public float getY() {
+		return location.getY();
+	}
+	
+	public Vector getLocation() {
+		return location;
+	}
+	
+	public float getRotation() {
+		return rotation;
+	}
+	
+	public float getSpeed() {
+		return speed;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+	
+	public int getWidth() {
+		return image.getWidth();
+	}
+	
+	public int getHeight() {
+		return image.getHeight();
+	}
+	
+	public boolean atWorldEdge() {
+		return getX() < getWidth() / 2 || getX() > 1920 - getWidth() / 2 || 
+				getY() < getHeight() / 2 || getY() > 1080 - getHeight() / 2;
+	}
+	
+	public boolean intersects(Entity e) {
+		boolean intersects = false;
+		
+		float dx = getWidth() / 2 * 0.95f;
+		float dy = getHeight() / 2 * 0.95f;
+		float edx = e.getWidth() / 2 * 0.95f;
+		float edy = e.getHeight() / 2 * 0.95f;
+				
+		switch(Geometry.getQuadrant(e.getX(), e.getY(), getX(), getY())) {
+			case 1:
+				intersects = getX() + dx > e.getX() - edx && getY() - dy < e.getY() + edy;
+				break;
+			case 4:
+				intersects = getX() - dx < e.getX() + edx && getY() - dy < e.getY() + edy;
+				break;
+			case 3:
+				intersects = getX() - dx < e.getX() + edx && getY() + dy > e.getY() - edy;
+				break;
+			case 2:
+				intersects = getX() + dx > e.getX() - edx && getY() + dy > e.getY() - edy;
+				break;
+		}
+
+		return intersects;
+	}
+	
+	public boolean intersects(Class cls) {
+		boolean intersects = false;
+		
+		for(Entity e : getWorld().getEntitiesInWorld())
+			if(e != null && intersects(e) && e.getClass().equals(cls))
+				intersects = true;
+		
+		return intersects;
+	}
+	
+	public Entity getIntersectingEntity(Class cls) {
+		for(Entity e : getWorld().getEntitiesInWorld())
+			if(intersects(cls) && intersects(e))
+				return e;
+		return null;
+	}
+	
+	public void turnTowards(float x, float y) {
+		ReferenceFrame rf = getWorld().getReferenceFrame();
+		
+		float rx = rf.getRelativeX();
+		float ry = rf.getRelativeY();
+		
+		float angle = Geometry.getAngle(getX() - rx, getY() - ry, x, y);
+		setRotation(angle);
+	}
+	
+	public void move(float speed) {
+		changeX(Geometry.getXComponent(speed, getRotation()));
+		changeY(Geometry.getYComponent(speed, getRotation()));
+	}
+	
+	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
+			throws SlickException {		
+		float rx = getWorld().getReferenceFrame().getRelativeX();
+		float ry = getWorld().getReferenceFrame().getRelativeY();
+		
+		image.setRotation(rotation);
+		image.draw(getX() - (getWidth() / 2.0f) - rx, getY() - (getHeight() / 2.0f) - ry);
+	}
+
+	abstract public void update(GameContainer gc, StateBasedGame gs, int d)
+			throws SlickException;
+}

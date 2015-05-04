@@ -1,6 +1,6 @@
 package entity.structure;
 
-import static utility.Type.*;
+import static entity.structure.Type.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,18 +8,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-import utility.Type;
 import entity.Entity;
 
 public class BlockStructure extends Entity {
 	private Scanner scan;
 	private ArrayList<Block> blocks;
-	private String schematic;
-	private Type type;
+	private String dir;
 	
-	public BlockStructure(Type type, String schematic) {
-		this.schematic = schematic;
-		this.type = type;
+	public BlockStructure(String map) {
+		this.dir = "src/text/" + map;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame gs, Graphics g)
@@ -32,15 +29,16 @@ public class BlockStructure extends Entity {
 			throws SlickException {
 		if(blocks == null)
 			try {
-				blocks = parseFile(schematic);
+				blocks = parseFile(SMALL_BLOCK, dir);
+				blocks = parseFile(LARGE_BLOCK, dir);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 	}
 	
-	private ArrayList<Block> parseFile(String schem) throws Exception {
+	private ArrayList<Block> parseFile(Type type, String dir) throws Exception {
 		ArrayList<Block> blocks = new ArrayList<Block>();
-		scan = new Scanner(new File(schem));
+		scan = new Scanner(new File(dir + (type == SMALL_BLOCK ? "/small.txt" : "/large.txt")));
 		
 		for(int j = 0; scan.hasNext(); j++) {
 			String line = scan.nextLine();
