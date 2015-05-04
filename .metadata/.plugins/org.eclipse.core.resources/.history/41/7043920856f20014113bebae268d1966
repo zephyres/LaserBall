@@ -36,6 +36,6 @@ public class Game extends World {
 	}
 	
 	private int getMapID() {
-		return 4;
+		return 3;
 	}
 }

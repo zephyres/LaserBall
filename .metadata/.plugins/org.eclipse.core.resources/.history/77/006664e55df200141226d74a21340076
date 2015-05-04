@@ -1,6 +1,5 @@
 package entity;
 
-import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -8,8 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import utility.Geometry;
 import utility.Vector;
-import entity.structure.LargeBlock;
-import entity.structure.SmallBlock;
+import entity.structure.*;
 
 public class Player extends Entity {
 	private Vector a, v;
@@ -38,16 +36,14 @@ public class Player extends Entity {
 	}
 	
 	public void movePlayer(Input in) {
-		ArrayList<Entity> small = getIntersectingEntities(SmallBlock.class);
-		ArrayList<Entity> large = getIntersectingEntities(LargeBlock.class);
-		ArrayList<Entity> blocks = new ArrayList<Entity>();
+		boolean small = intersects(SmallBlock.class);
+		boolean large = intersects(LargeBlock.class);
+		Entity e = null;
 		
-		for(Entity e : small)
-			blocks.add(e);
-		for(Entity e : large)
-			blocks.add(e);
-		
-		Entity e = getClosest(blocks);
+		if(small)
+			e = getIntersectingEntity(SmallBlock.class);
+		if(large)
+			e = getIntersectingEntity(LargeBlock.class);
 		
 		float dx = getWidth() / 2;
 		float dy = getHeight() / 2;
@@ -123,26 +119,5 @@ public class Player extends Entity {
 					v.add(new Vector(10, getRotation(), 0)), 5
 				), getX() + dx, getY() + dy
 			);
-	}
-	
-	public Entity getClosest(ArrayList<Entity> a) {
-		if(a.isEmpty())
-			return null;
-		
-		float d = 1000f;
-		int i = 0;
-		
-		for(Entity e : a) {
-			float dx = Math.abs(getX() - e.getX());
-			float dy = Math.abs(getY() - e.getY());
-			float dis = (float) Math.sqrt(dx * dx + dy * dy);
-			
-			if(dis < d) {
-				d = dis;
-				i = a.indexOf(e);
-			}
-		}
-		
-		return a.get(i);
 	}
 }

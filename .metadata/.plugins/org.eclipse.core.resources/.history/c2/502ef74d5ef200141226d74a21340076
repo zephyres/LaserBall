@@ -38,16 +38,16 @@ public class Player extends Entity {
 	}
 	
 	public void movePlayer(Input in) {
-		ArrayList<Entity> small = getIntersectingEntities(SmallBlock.class);
-		ArrayList<Entity> large = getIntersectingEntities(LargeBlock.class);
-		ArrayList<Entity> blocks = new ArrayList<Entity>();
+		boolean small = intersects(SmallBlock.class);
+		boolean large = intersects(LargeBlock.class);
+		Entity e = null;
 		
-		for(Entity e : small)
-			blocks.add(e);
-		for(Entity e : large)
-			blocks.add(e);
 		
-		Entity e = getClosest(blocks);
+		
+		if(small)
+			e = getIntersectingEntity(SmallBlock.class);
+		if(large)
+			e = getIntersectingEntity(LargeBlock.class);
 		
 		float dx = getWidth() / 2;
 		float dy = getHeight() / 2;

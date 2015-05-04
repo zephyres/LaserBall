@@ -38,30 +38,50 @@ public class Player extends Entity {
 	}
 	
 	public void movePlayer(Input in) {
-		ArrayList<Entity> small = getIntersectingEntities(SmallBlock.class);
-		ArrayList<Entity> large = getIntersectingEntities(LargeBlock.class);
-		ArrayList<Entity> blocks = new ArrayList<Entity>();
-		
-		for(Entity e : small)
-			blocks.add(e);
-		for(Entity e : large)
-			blocks.add(e);
-		
-		Entity e = getClosest(blocks);
-		
 		float dx = getWidth() / 2;
 		float dy = getHeight() / 2;
 		
-		boolean left = e != null && getX() < e.getX();
-		boolean right = e != null && getX() > e.getX();
-		boolean up = e != null && getY() < e.getY();
-		boolean down = e != null && getY() > e.getY();
+		/*boolean small = intersects(SmallBlock.class);
+		boolean large = intersects(LargeBlock.class);
+		Entity e = null;*/
 		
-		//Normalize (still needs fixing)
-		if((left || right) && (up || down)) {
-			float a = Geometry.getAngle(e.getX(), e.getY(), getX(), getY());
+		boolean up = false;
+		boolean down = false;
+		boolean left = false;
+		boolean right = false;
+		
+		ArrayList<Entity> intersectingEntities = new ArrayList<Entity>();
+		
+		for(Entity en : getIntersectingEntities(SmallBlock.class))
+			intersectingEntities.add(en);
+		for(Entity en : getIntersectingEntities(LargeBlock.class))
+			intersectingEntities.add(en);
+		for(Entity en : intersectingEntities) {
+			boolean l = getX() < en.getX();
+			boolean r = getX() > en.getX();
+			boolean u = getY() < en.getY();
+			boolean d = getY() > en.getY();
 			
-			if((a > 45 && a < 135) || (a > 225 && a < 315)) {
+			if((left || right) && (up || down)) {
+				if(Math.abs(getX() - en.getX()) > Math.abs(getY() - en.getY())) {
+					up = false;
+					down = false;
+				}
+				
+				else {
+					left = false;
+					right = false;
+				}
+			}
+			
+			up = up || u;
+			down = down || d;
+			left = left || l;
+			right = right || r;
+		}
+		
+		if(!intersectingEntities.isEmpty() && (left || right) && (up || down)) {
+			if(Math.abs(getX() - intersectingEntities.get(0).getX()) > Math.abs(getY() - intersectingEntities.get(0).getY())) {
 				up = false;
 				down = false;
 			}
@@ -71,8 +91,31 @@ public class Player extends Entity {
 				right = false;
 			}
 		}
+		
+		/*if(small)
+			e = getIntersectingEntity(SmallBlock.class);
+		if(large)
+			e = getIntersectingEntity(LargeBlock.class);*/
+		
+		/*boolean left = e != null && getX() < e.getX();
+		boolean right = e != null && getX() > e.getX();
+		boolean up = e != null && getY() < e.getY();
+		boolean down = e != null && getY() > e.getY();*/
+		
+		//Normalize (still needs fixing)
+		/*if((left || right) && (up || down)) {
+			if(Math.abs(getX() - e.getX()) > Math.abs(getY() - e.getY())) {
+				up = false;
+				down = false;
+			}
+			
+			else {
+				left = false;
+				right = false;
+			}
+		}*/
 				
-		if(getX() < dx || getX() > 1920 - dx || left || right) {
+		if(getX() < dx || getX() > 1920 - dx || left || right && (!up || !down)) {
 			v.setX(0);
 			
 			if(right || getX() < dx)
@@ -81,7 +124,7 @@ public class Player extends Entity {
 				changeX(-0.1f);
 		}
 		
-		if(getY() < dy || getY() > 1080 - dy || up || down) {
+		if((getY() < dy || getY() > 1080 - dy || up || down) && (!left || !right)) {
 			v.setY(0);
 			
 			if(down || getY() < dy)
@@ -123,26 +166,5 @@ public class Player extends Entity {
 					v.add(new Vector(10, getRotation(), 0)), 5
 				), getX() + dx, getY() + dy
 			);
-	}
-	
-	public Entity getClosest(ArrayList<Entity> a) {
-		if(a.isEmpty())
-			return null;
-		
-		float d = 1000f;
-		int i = 0;
-		
-		for(Entity e : a) {
-			float dx = Math.abs(getX() - e.getX());
-			float dy = Math.abs(getY() - e.getY());
-			float dis = (float) Math.sqrt(dx * dx + dy * dy);
-			
-			if(dis < d) {
-				d = dis;
-				i = a.indexOf(e);
-			}
-		}
-		
-		return a.get(i);
 	}
 }
