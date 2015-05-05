@@ -1,0 +1,50 @@
+package utility;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MapInfo {
+	private ArrayList<String> details;
+	
+	public MapInfo(String map) {
+		details = new ArrayList<String>();
+		
+		try {
+			@SuppressWarnings("resource")
+			Scanner s = new Scanner(new File("src/text/" + map + "/info.txt"));
+			
+			while(s.hasNext())
+				details.add(s.nextLine());
+		} catch(FileNotFoundException e) {}
+	}
+	
+	public String getMapName() {
+		return details.get(0);
+	}
+	
+	public float getSpawnX() {
+		return Float.parseFloat(details.get(1).split(" ")[0]);
+	}
+	
+	public float getSpawnY() {
+		return Float.parseFloat(details.get(1).split(" ")[1]);
+	}
+	
+	public ArrayList<ArrayList<Float>> getSpawnerDetails() {
+		ArrayList<ArrayList<Float>> details = new ArrayList<ArrayList<Float>>();
+		ArrayList<Float> a = new ArrayList<Float>();
+		
+		for(String s : this.details.get(2).split(" ")) {
+			System.out.println(s);
+			a.add(Float.parseFloat(s));
+			if(a.size() == 3) {
+				details.add(a);
+				a.clear();
+			}
+		}
+		
+		return details;
+	}
+}

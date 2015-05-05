@@ -1,8 +1,0 @@
-package world;
-
-public class MainMenu extends World {
-	@Override
-	public int getID() {
-		return 0;
-	}
-}

@@ -9,7 +9,6 @@
 <fullyQualifiedTypeName name="entity.Entity"/>
 <fullyQualifiedTypeName name="utility.ReferenceFrame"/>
 <fullyQualifiedTypeName name="utility.Geometry"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.util.ResourceLoader"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
@@ -39,4 +38,6 @@
 <fullyQualifiedTypeName name="entity.structure.LargeBlock"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.geom.Shape"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.geom.Rectangle"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
+<fullyQualifiedTypeName name="entity.Spawner"/>
 </qualifiedTypeNameHistroy>
